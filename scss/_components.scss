@@ -22,16 +22,27 @@ body {
     .main__input {
       @include mixins.inputStyling;
     }
-    .main__submit-name {
+    .main__submit-name,
+    .main__submit-task {
       @include mixins.buttonStyling;
       margin: $margin 0;
     }
-    .main__submit-name:hover {
+    .main__submit-name:hover,
+    .main__submit-task:hover {
       cursor: pointer;
     }
 
     .main__intro {
       @include mixins.mainText;
+    }
+
+    .main__task-container {
+      text-align: left;
+      margin: $margin;
+
+      .task-container__tasks-completed {
+        color: $slate-grey;
+      }
     }
   }
 }
