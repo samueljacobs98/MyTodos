@@ -6,7 +6,9 @@ const main = document.querySelector(".main");
 const tasks = [];
 let numberTaskToComplete = tasks.length;
 
-// const printTasks = () => {};
+const dealWithTaskSubmit = () => {
+  console.log("yep");
+};
 
 const checkValidName = (name) => {
   if (!name) return false;
@@ -40,9 +42,10 @@ const addTaskInput = () => {
 };
 
 const addTaskSubmitBtn = () => {
-  const submit = document.createElement("input");
+  const submit = document.createElement("button");
   main.appendChild(submit);
   submit.classList.add("main__submit-task");
+  submit.innerText = "Add task";
 };
 
 const addTaskAdder = () => {
