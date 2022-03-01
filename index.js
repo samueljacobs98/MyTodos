@@ -2,6 +2,8 @@ const submitNameBtn = document.querySelector(".main__submit-name");
 const nameInput = document.querySelector(".main__input--name");
 const welcome = document.querySelector(".main__welcome");
 const main = document.querySelector(".main");
+const footer = document.querySelector(".footer");
+const footerText = document.querySelector(".footer__text");
 
 const tasks = [];
 let numberTaskToComplete = tasks.length;
@@ -20,8 +22,12 @@ const dealWithCheckBox = (checkbox) => {
   toggleActive(checkbox);
   const activeBoxes = activeCheckboxCount();
   console.log(activeBoxes);
-  // If activeBoxes > 0
-  // Display modal
+  if (activeBoxes) {
+    footer.style.display = "flex";
+    footerText.innerText = `${activeBoxes} Task(s) Selected`;
+  } else {
+    footer.style.display = "none";
+  }
 };
 
 const printTasks = () => {
