@@ -1,0 +1,33 @@
+@use "./variables" as *;
+@use "./mixins/mixins";
+
+body {
+  .header {
+    .header__logo {
+      @include mixins.logoStyling;
+    }
+    .header__reset {
+      @include mixins.buttonStyling;
+    }
+    .header__reset:hover {
+      @include mixins.buttonHoverStyling;
+      cursor: pointer;
+    }
+  }
+
+  .main {
+    .main__welcome {
+      @include mixins.headerStyling;
+    }
+    .main__name-input {
+      @include mixins.inputStyling;
+    }
+    .main__submit-name {
+      @include mixins.buttonStyling;
+      margin: 10px 0;
+    }
+    .main__submit-name:hover {
+      cursor: pointer;
+    }
+  }
+}

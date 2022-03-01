@@ -1,0 +1,16 @@
+@use "./variables" as *;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $space-black;
+  color: $white;
+  font-family: $font;
+}

@@ -1,0 +1,30 @@
+@use "../variables" as *;
+
+@mixin buttonStyling {
+  background-image: linear-gradient(180deg, #e1a0a0, #e58181);
+  box-shadow: 0, 10px 40px #6b3838;
+  border: none;
+  border-radius: 7px;
+  width: 120px;
+  height: 50px;
+  color: $white;
+}
+
+@mixin buttonHoverStyling {
+  background-image: linear-gradient(180deg, #e2c1c1, #ea8282);
+}
+
+@mixin inputStyling {
+  background-color: $deep-navy;
+  border: 1px $slate-grey dashed;
+}
+
+@mixin headerStyling {
+  font-size: $header-size;
+  font-weight: $header-weight;
+}
+
+@mixin logoStyling {
+  font-size: $logo-size;
+  font-weight: $logo-weight;
+}
