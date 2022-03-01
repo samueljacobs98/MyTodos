@@ -34,6 +34,7 @@ body {
 
     .main__intro {
       @include mixins.mainText;
+      max-width: 500px;
     }
 
     .main__task-container {
@@ -42,12 +43,32 @@ body {
       width: 100%;
       max-width: 500px;
 
+      position: relative;
+
+      .task-container__title {
+        margin-bottom: $input-padding;
+      }
+
+      .task__count {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: translateY(110%);
+
+        color: $slate-grey;
+      }
+
       .task-container__tasks-completed {
         color: $slate-grey;
       }
 
       .task-container__task {
         @include mixins.task;
+
+        .task__checkbox:hover,
+        .task__edit:hover {
+          cursor: pointer;
+        }
       }
     }
   }

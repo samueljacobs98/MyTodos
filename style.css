@@ -81,12 +81,24 @@ body .main .main__intro {
   font-weight: normal;
   color: #6c6a7c;
   margin: 10px 0;
+  max-width: 500px;
 }
 body .main .main__task-container {
   text-align: left;
   margin: 10px;
   width: 100%;
   max-width: 500px;
+  position: relative;
+}
+body .main .main__task-container .task-container__title {
+  margin-bottom: 18px;
+}
+body .main .main__task-container .task__count {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(110%);
+  color: #6c6a7c;
 }
 body .main .main__task-container .task-container__tasks-completed {
   color: #6c6a7c;
@@ -94,4 +106,14 @@ body .main .main__task-container .task-container__tasks-completed {
 body .main .main__task-container .task-container__task {
   background-color: #2b2a33;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body .main .main__task-container .task-container__task .task__checkbox {
+  background-color: none;
+}
+body .main .main__task-container .task-container__task .task__checkbox:hover,
+body .main .main__task-container .task-container__task .task__edit:hover {
+  cursor: pointer;
 }

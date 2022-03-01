@@ -7,6 +7,23 @@ const tasks = [];
 let numberTaskToComplete = tasks.length;
 let firstSubmit = true;
 
+const toggleActive = (checkbox) => {
+  checkbox.classList.toggle("active-checkbox");
+};
+
+const activeCheckboxCount = () => {
+  const checkboxes = document.querySelectorAll(".active-checkbox");
+  return checkboxes.length;
+};
+
+const dealWithCheckBox = (checkbox) => {
+  toggleActive(checkbox);
+  const activeBoxes = activeCheckboxCount();
+  console.log(activeBoxes);
+  // If activeBoxes > 0
+  // Display modal
+};
+
 const printTasks = () => {
   if (firstSubmit) {
     const completedMsg = document.querySelector(
@@ -22,18 +39,52 @@ const printTasks = () => {
   const tasksContainer = document.querySelector(".main__task-container");
 
   tasks.forEach((task, index) => {
+    // Create container
+    const taskElementsContainer = document.createElement("div");
+    taskElementsContainer.classList.add(`task-container__task`);
+    taskElementsContainer.classList.add(`task-container__task--${index}`);
+    tasksContainer.appendChild(taskElementsContainer);
+    // Create tickbox
+    const taskCheckBox = document.createElement("input");
+    taskCheckBox.setAttribute("type", "checkbox");
+    taskCheckBox.classList.add("task__checkbox");
+    taskCheckBox.classList.add(`task__checkbox--${index}`);
+    taskCheckBox.setAttribute("onclick", "dealWithCheckBox(this)");
+    taskElementsContainer.appendChild(taskCheckBox);
+    // Create task
     const taskElement = document.createElement("p");
-    taskElement.classList.add(`task-container__task`);
-    taskElement.classList.add(`task-container__task--${index}`);
-    tasksContainer.appendChild(taskElement);
-    taskElement.innerText = `${index + 1}. ${task}`;
+    taskElement.classList.add("task__details");
+    taskElement.innerText = `${task}`;
+    taskElementsContainer.appendChild(taskElement);
+    // Create edit symbol
+    const editButton = document.createElement("img");
+    editButton.setAttribute("src", "./assets/svgs/edit.svg");
+    editButton.classList.add("task__edit");
+    editButton.classList.add(`task__edit--${index}`);
+    taskElementsContainer.appendChild(editButton);
   });
+};
+
+const createTasksToComplete = () => {
+  const tasksToComplete = document.createElement("p");
+  tasksToComplete.classList.add("task__count");
+  const tasksContainer = document.querySelector(".main__task-container");
+  tasksContainer.appendChild(tasksToComplete);
+};
+
+const updateTasksToComplete = () => {
+  if (tasks.length === 1) {
+    createTasksToComplete();
+  }
+  const tasksToCompleteP = document.querySelector(".task__count");
+  tasksToCompleteP.innerText = `Tasks to Complete: ${tasks.length}`;
 };
 
 const dealWithTaskSubmit = () => {
   const task = document.querySelector(".main__input--task").value;
   tasks.push(task);
   printTasks();
+  updateTasksToComplete();
 };
 
 const checkValidName = (name) => {
@@ -91,7 +142,6 @@ const addTasksContainer = () => {
 };
 
 const tasksToComplete = () => {
-  console.log(numberTaskToComplete);
   const taskContainer = document.querySelector(".main__task-container");
   if (numberTaskToComplete) {
     printTasks();
