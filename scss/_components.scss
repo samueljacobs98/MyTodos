@@ -39,9 +39,15 @@ body {
     .main__task-container {
       text-align: left;
       margin: $margin;
+      width: 100%;
+      max-width: 500px;
 
       .task-container__tasks-completed {
         color: $slate-grey;
+      }
+
+      .task-container__task {
+        @include mixins.task;
       }
     }
   }

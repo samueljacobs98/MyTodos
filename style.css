@@ -85,7 +85,13 @@ body .main .main__intro {
 body .main .main__task-container {
   text-align: left;
   margin: 10px;
+  width: 100%;
+  max-width: 500px;
 }
 body .main .main__task-container .task-container__tasks-completed {
   color: #6c6a7c;
+}
+body .main .main__task-container .task-container__task {
+  background-color: #2b2a33;
+  padding: 10px;
 }

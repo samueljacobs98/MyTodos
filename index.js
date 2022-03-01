@@ -5,14 +5,22 @@ const main = document.querySelector(".main");
 
 const tasks = [];
 let numberTaskToComplete = tasks.length;
+let firstSubmit = true;
 
 const printTasks = () => {
-  const completedMsg = document.querySelector(
-    ".task-container__tasks-completed"
-  );
-  completedMsg.remove();
+  if (firstSubmit) {
+    const completedMsg = document.querySelector(
+      ".task-container__tasks-completed"
+    );
+    completedMsg.remove();
+    firstSubmit = false;
+  } else {
+    const previousTasks = document.querySelectorAll(".task-container__task");
+    previousTasks.forEach((task) => task.remove());
+  }
 
   const tasksContainer = document.querySelector(".main__task-container");
+
   tasks.forEach((task, index) => {
     const taskElement = document.createElement("p");
     taskElement.classList.add(`task-container__task`);
@@ -24,7 +32,6 @@ const printTasks = () => {
 
 const dealWithTaskSubmit = () => {
   const task = document.querySelector(".main__input--task").value;
-  console.log(task);
   tasks.push(task);
   printTasks();
 };

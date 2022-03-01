@@ -36,3 +36,8 @@
   color: $slate-grey;
   margin: $margin 0;
 }
+
+@mixin task {
+  background-color: $deep-navy;
+  padding: $margin;
+}
