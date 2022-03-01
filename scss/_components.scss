@@ -19,15 +19,19 @@ body {
     .main__welcome {
       @include mixins.headerStyling;
     }
-    .main__name-input {
+    .main__input {
       @include mixins.inputStyling;
     }
     .main__submit-name {
       @include mixins.buttonStyling;
-      margin: 10px 0;
+      margin: $margin 0;
     }
     .main__submit-name:hover {
       cursor: pointer;
+    }
+
+    .main__intro {
+      @include mixins.mainText;
     }
   }
 }

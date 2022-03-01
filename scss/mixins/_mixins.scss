@@ -17,6 +17,7 @@
 @mixin inputStyling {
   background-color: $deep-navy;
   border: 1px $slate-grey dashed;
+  color: $slate-grey;
 }
 
 @mixin headerStyling {
@@ -27,4 +28,11 @@
 @mixin logoStyling {
   font-size: $logo-size;
   font-weight: $logo-weight;
+}
+
+@mixin mainText {
+  font-size: $paragraph-size;
+  font-weight: $paragraph-weight;
+  color: $slate-grey;
+  margin: $margin 0;
 }
