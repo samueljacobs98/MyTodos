@@ -6,8 +6,27 @@ const main = document.querySelector(".main");
 const tasks = [];
 let numberTaskToComplete = tasks.length;
 
+const printTasks = () => {
+  const completedMsg = document.querySelector(
+    ".task-container__tasks-completed"
+  );
+  completedMsg.remove();
+
+  const tasksContainer = document.querySelector(".main__task-container");
+  tasks.forEach((task, index) => {
+    const taskElement = document.createElement("p");
+    taskElement.classList.add(`task-container__task`);
+    taskElement.classList.add(`task-container__task--${index}`);
+    tasksContainer.appendChild(taskElement);
+    taskElement.innerText = `${index + 1}. task`;
+  });
+};
+
 const dealWithTaskSubmit = () => {
-  console.log("yep");
+  const task = document.querySelector(".main__input--task").value;
+  console.log(task);
+  tasks.push(task);
+  printTasks();
 };
 
 const checkValidName = (name) => {
@@ -46,6 +65,7 @@ const addTaskSubmitBtn = () => {
   main.appendChild(submit);
   submit.classList.add("main__submit-task");
   submit.innerText = "Add task";
+  submit.setAttribute("onclick", "dealWithTaskSubmit()");
 };
 
 const addTaskAdder = () => {
