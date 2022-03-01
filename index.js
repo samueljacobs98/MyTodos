@@ -18,7 +18,7 @@ const printTasks = () => {
     taskElement.classList.add(`task-container__task`);
     taskElement.classList.add(`task-container__task--${index}`);
     tasksContainer.appendChild(taskElement);
-    taskElement.innerText = `${index + 1}. task`;
+    taskElement.innerText = `${index + 1}. ${task}`;
   });
 };
 
