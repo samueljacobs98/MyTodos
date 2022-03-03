@@ -34,15 +34,68 @@ body {
 
     .main__intro {
       @include mixins.mainText;
+      max-width: 500px;
     }
 
     .main__task-container {
       text-align: left;
       margin: $margin;
+      width: 100%;
+      max-width: 500px;
+
+      position: relative;
+
+      .task-container__title {
+        margin-bottom: $input-padding;
+      }
+
+      .task__count {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: translateY(110%);
+
+        color: $slate-grey;
+      }
 
       .task-container__tasks-completed {
         color: $slate-grey;
       }
+
+      .task-container__task {
+        @include mixins.task;
+
+        .task__checkbox:hover,
+        .task__edit:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .footer {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 93px;
+    width: 100vw;
+    background-color: $deep-navy;
+
+    padding: $body-padding-sides-mobile;
+    justify-content: space-between;
+    align-items: center;
+
+    .footer__delete {
+      @include mixins.buttonStyling;
+
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .footer__delete:hover {
+      cursor: pointer;
     }
   }
 }

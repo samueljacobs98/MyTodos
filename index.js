@@ -2,31 +2,99 @@ const submitNameBtn = document.querySelector(".main__submit-name");
 const nameInput = document.querySelector(".main__input--name");
 const welcome = document.querySelector(".main__welcome");
 const main = document.querySelector(".main");
+const footer = document.querySelector(".footer");
+const footerText = document.querySelector(".footer__text");
+const deleteBtn = document.querySelector(".footer__delete");
 
-const tasks = [];
+let tasks = [];
 let numberTaskToComplete = tasks.length;
+let firstSubmit = true;
+
+const toggleActive = (checkbox) => {
+  checkbox.classList.toggle("active-checkbox");
+};
+
+const activeCheckboxCount = () => {
+  const checkboxes = document.querySelectorAll(".active-checkbox");
+  return checkboxes.length;
+};
+
+const updateFooter = () => {
+  const activeBoxes = activeCheckboxCount();
+  if (activeBoxes) {
+    footer.style.display = "flex";
+    footerText.innerText = `${activeBoxes} Task(s) Selected`;
+  } else {
+    footer.style.display = "none";
+  }
+};
+
+const dealWithCheckBox = (checkbox) => {
+  toggleActive(checkbox);
+  updateFooter();
+};
 
 const printTasks = () => {
-  const completedMsg = document.querySelector(
-    ".task-container__tasks-completed"
-  );
-  completedMsg.remove();
+  if (firstSubmit) {
+    const completedMsg = document.querySelector(
+      ".task-container__tasks-completed"
+    );
+    completedMsg.remove();
+    firstSubmit = false;
+  } else {
+    const previousTasks = document.querySelectorAll(".task-container__task");
+    previousTasks.forEach((task) => task.remove());
+  }
 
   const tasksContainer = document.querySelector(".main__task-container");
+
   tasks.forEach((task, index) => {
+    // Create container
+    const taskElementsContainer = document.createElement("div");
+    taskElementsContainer.classList.add(`task-container__task`);
+    taskElementsContainer.classList.add(`task-container__task--${index}`);
+    tasksContainer.appendChild(taskElementsContainer);
+    // Create tickbox
+    const taskCheckBox = document.createElement("input");
+    taskCheckBox.setAttribute("type", "checkbox");
+    taskCheckBox.classList.add("task__checkbox");
+    taskCheckBox.classList.add(`task__checkbox--${index}`);
+    taskCheckBox.setAttribute("onclick", "dealWithCheckBox(this)");
+    taskElementsContainer.appendChild(taskCheckBox);
+    // Create task
     const taskElement = document.createElement("p");
-    taskElement.classList.add(`task-container__task`);
-    taskElement.classList.add(`task-container__task--${index}`);
-    tasksContainer.appendChild(taskElement);
-    taskElement.innerText = `${index + 1}. ${task}`;
+    taskElement.classList.add("task__details");
+    taskElement.innerText = `${task}`;
+    taskElementsContainer.appendChild(taskElement);
+    // Create edit symbol
+    const editButton = document.createElement("img");
+    editButton.setAttribute("src", "./assets/svgs/edit.svg");
+    editButton.classList.add("task__edit");
+    editButton.classList.add(`task__edit--${index}`);
+    taskElementsContainer.appendChild(editButton);
   });
+};
+
+const createTasksToComplete = () => {
+  const tasksToComplete = document.createElement("p");
+  tasksToComplete.classList.add("task__count");
+  const tasksContainer = document.querySelector(".main__task-container");
+  tasksContainer.appendChild(tasksToComplete);
+};
+
+const updateTasksToComplete = () => {
+  if (tasks.length === 1) {
+    createTasksToComplete();
+  }
+  const tasksToCompleteP = document.querySelector(".task__count");
+  tasksToCompleteP.innerText = `Tasks to Complete: ${tasks.length}`;
 };
 
 const dealWithTaskSubmit = () => {
   const task = document.querySelector(".main__input--task").value;
-  console.log(task);
   tasks.push(task);
   printTasks();
+  updateTasksToComplete();
 };
 
 const checkValidName = (name) => {
@@ -84,7 +152,6 @@ const addTasksContainer = () => {
 };
 
 const tasksToComplete = () => {
-  console.log(numberTaskToComplete);
   const taskContainer = document.querySelector(".main__task-container");
   if (numberTaskToComplete) {
     printTasks();
@@ -112,4 +179,23 @@ const dealWithSubmit = () => {
   }
 };
 
+const deleteSelected = () => {
+  const activeTasksInDom = document.querySelectorAll(".active-checkbox");
+  if (activeTasksInDom.length > 1) {
+    activeTasksInDom.forEach((task) => {
+      const index = task.parentElement.classList[1];
+      const cleanIndex = index.replace(/\D/g, "");
+      tasks[cleanIndex] = "";
+    });
+  } else {
+    const index = activeTasksInDom[0].parentElement.classList[1];
+    const cleanIndex = index.replace(/\D/g, "");
+    tasks[cleanIndex] = "";
+  }
+  tasks = tasks.filter((item) => item);
+
+  printTasks();
+};
+
 submitNameBtn.addEventListener("click", dealWithSubmit);
+deleteBtn.addEventListener("click", deleteSelected);
